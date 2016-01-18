@@ -1,0 +1,20 @@
+#!/bin/bash -ex
+
+APP_HOME=/path/to/dir
+APP_NAME=app
+
+ls target/${APP_NAME}-*.jar | xargs -Iarg cp arg ${APP_HOME}/${APP_NAME}.jar
+
+cd ${APP_HOME}
+if [ ! -e ${APP_NAME}.pid ]
+then
+  echo "not running."
+else
+  PID=`cat ${APP_NAME}.pid`
+  kill -9 $PID
+  rm ${APP_NAME}.pid
+  sleep 5
+fi
+
+BUILD_ID=dontKillMe nohup java -jar ${APP_NAME}.jar >> ${APP_NAME}.log 2>&1 &
+echo "$!" > ${APP_NAME}.pid
