@@ -1,4 +1,4 @@
-rebaseやったらコミット日時が変わっちゃった。
+一括でCOMMIT_DATEをAUTHOR_DATEに変換
 $ git filter-branch -f --env-filter '
 export GIT_COMMITTER_DATE=$GIT_AUTHOR_DATE
 '
