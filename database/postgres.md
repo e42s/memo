@@ -36,5 +36,5 @@ SELECT (hoge = 0) AS is_zero, (hoge = '') AS is_empty, hoge FROM hoge ORDER BY i
   
 #### テーブルに何も入ってなかったらインサートする
 ```sql
-INSERT INTO hoge (id, name) SELECT 1, 'foo', ' WHERE NOT EXISTS (SELECT id FROM hoge);
+INSERT INTO hoge (id, name) SELECT 1, 'foo' WHERE NOT EXISTS (SELECT id FROM hoge);
 ```
