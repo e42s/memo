@@ -33,3 +33,8 @@ SELECT (hoge = '') AS is_empty, hoge FROM hoge ORDER BY is_empty ASC NULLS LAST,
 ```sql
 SELECT (hoge = 0) AS is_zero, (hoge = '') AS is_empty, hoge FROM hoge ORDER BY is_zero ASC NULLS LAST, is_empty ASC NULLS LAST, hoge NULLS LAST;
 ```
+  
+#### テーブルに何も入ってなかったらインサートする
+```sql
+INSERT INTO hoge (id, name) SELECT 1, 'foo', ' WHERE NOT EXISTS (SELECT id FROM hoge);
+```
