@@ -18,7 +18,11 @@ https://github.com/vim-perl/vim-perl
 ### powerline
 vimのステータス表示  
 https://github.com/powerline/powerline  
-
+  
+pipがない場合
+```sh
+curl -kL https://bootstrap.pypa.io/get-pip.py | python
+```
 ## .screenrc
 ```sh
 # mouse track
