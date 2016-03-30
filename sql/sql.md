@@ -21,3 +21,9 @@ INSERT INTO table (column1, column2...) VALUES (value1, value2...);
 ```sql
 UPDATE table SET column1 = value1, column2 = value2 [WHERE ...];
 ```
+
+## シーケンス
+### シーケンス一覧
+```sql
+SELECT sequence_name FROM information_schema.sequences
+```
