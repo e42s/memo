@@ -1,6 +1,10 @@
 .bashrc  
 ```sh
+PERL5LIB=~/.perl5lib
+
 alias vi=vim
+alias cpanm="cpanm --local-lib=~/.perl5lib"
+
 stty stop undef
 ```
   
@@ -26,9 +30,10 @@ altscreen on
 escape ^Xx
 
 # 移動をCtrl + 矢印キーで
-bindkey " " focus right
-bindkey "" focus upt
-bindkey "" focus bottom
+bindkey "^[[1;5C" focus right↲
+bindkey "^[[1;5D" focus left↲
+bindkey "^[[1;5A" focus up↲
+bindkey "^[[1;5B" focus bottom↲
 # 終了
 bind \ quit
 
@@ -124,13 +129,26 @@ endif
 
 " NeoBundleを初期化
 call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundle 'scrooloose/nerdtree.git'
 call neobundle#end()
 
 " ファイル形式検出、プラグイン、インデントを ON
 filetype plugin indent on
 
 "==========================================
-"neocomplete.vim
+" NERDTree ツリー表示
+"==========================================
+" 引数ない場合に表示
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" クローズ時時にNERDTreeも終了
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '＋'
+let g:NERDTreeDirArrowCollapsible = '－'
+
+"==========================================
+" neocomplete.vim
 "==========================================
 "use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -218,8 +236,7 @@ inoremap <expr><left> neocomplete#cancel_popup() . "\<left>"
 
 map <C-c> :SyntasticCheck<CR>
 
-" idesa
-" ds
+" ide
 noremap <C-c> yy
 noremap <C-v> p
 noremap <C-a> ggVG
@@ -229,8 +246,10 @@ noremap <C-y> <C-r>
 noremap <C-d> dd
 noremap <C-S-Right> >>
 noremap <C-S-Left> <<
+noremap <C-f> /
 
-noremap <C-t> :tabnew<kEnter>
-noremap <C-s> :w<kEnter>
-noremap <C-o> :args
+noremap <C-t> :tabnew<CR>:NERDTree<CR>
+noremap <C-s> :w<CR>
+noremap <C-o> :NERDTree<CR>
+noremap <C-n> :NERDTreeToggle<CR>
 ```
