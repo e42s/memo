@@ -110,8 +110,9 @@ Bundle 'tpope/vim-pathogen'
 Bundle 'scrooloose/syntastic'
 call pathogen#infect()
 
-" perl6 syntax
+" vim-plug
 call plug#begin('~/.vim/plugged')
+" syntax
 Plug 'vim-perl/vim-perl', {}
 call plug#end()
 
@@ -129,7 +130,14 @@ endif
 
 " NeoBundleを初期化
 call neobundle#begin(expand('~/.vim/bundle/'))
+" ファイル操作
 NeoBundle 'scrooloose/nerdtree.git'
+" パッケージ名の自動チェック,ローカルモジュールのオムニ補完↲
+NeoBundle 'duck8823/perl-support.vim'
+" vital
+NeoBundle 'vim-jp/vital.vim'
+" Plugin template
+NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 call neobundle#end()
 
 " ファイル形式検出、プラグイン、インデントを ON
@@ -191,31 +199,6 @@ let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
 
 "==========================================
-"パッケージ名の自動チェック
-"==========================================
-function! s:get_package_name()
-        let mx = '^\s*package\s\+\([^ ;]\+\)'
-        for line in getline(1, 5)
-                if line =~ mx
-                        return substitute(matchstr(line, mx), mx, '\1', '')
-                endif
-        endfor
-        return ""
-endfunction
-
-function! s:check_package_name()
-        let path = substitute(expand('%:p'), '\\', '/', 'g')
-        let name = substitute(s:get_package_name(), '::', '/', 'g') . '.pm'
-        if path[-len(name):] != name
-                echohl WarningMsg
-                echomsg "パッケージ名と保存されているパスが異なります。"
-                echohl None
-        endif
-endfunction
-
-au! BufWritePost *.pm call s:check_package_name()
-
-"==========================================
 " Key Bind
 " =========================================
 " Plugin key-mappings.
@@ -234,7 +217,7 @@ smap <expr><TAB>
 " 補完をキャンセルしてカーソル移動
 inoremap <expr><left> neocomplete#cancel_popup() . "\<left>"
 
-map <C-c> :SyntasticCheck<CR>
+map <C-c> :SynfutasticCheck<CR>
 
 " ide
 noremap <C-c> yy
