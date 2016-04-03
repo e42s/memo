@@ -3,7 +3,6 @@
 PERL5LIB=~/.perl5lib
 
 alias vi=vim
-alias cpanm="cpanm --local-lib=~/.perl5lib"
 
 stty stop undef
 ```
@@ -30,10 +29,10 @@ altscreen on
 escape ^Xx
 
 # 移動をCtrl + 矢印キーで
-bindkey "^[[1;5C" focus right↲
-bindkey "^[[1;5D" focus left↲
-bindkey "^[[1;5A" focus up↲
-bindkey "^[[1;5B" focus bottom↲
+bindkey "^[[1;5C" focus right
+bindkey "^[[1;5D" focus left
+bindkey "^[[1;5A" focus up
+bindkey "^[[1;5B" focus bottom
 # 終了
 bind \ quit
 
@@ -42,6 +41,43 @@ utf8 on
 #shelltitle "$ |$SHELL"
 caption always '%?%F%{= rk}%:%{= wk}%?%n %f %t%='
 hardstatus alwayslastline '%{= kw}%02c:%s %{= .y}%H %L=%{= .b}%-w%46>%{= .r}%n %t*%{= .b}%+w%-16=%{= .y}[%l]'
+
+# startup message
+startup_message off
+```
+  
+.screenrc.ide.layout
+```screen
+source ~/.screenrc
+
+# create window
+screen 0
+screen 1
+
+# create layout
+layout new ide
+layout new full
+
+# setup layoyt full
+layout select full
+only
+select 0
+
+# setup layout ide
+layout select ide
+split
+select 0
+resize -l 70%
+focus bottom
+select 1
+focus up
+
+# select layout ide
+layout select ide
+layout show
+
+# keybind layout change
+bindkey "^L" layout next
 
 ```
   
@@ -132,10 +168,10 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 " ファイル操作
 NeoBundle 'scrooloose/nerdtree.git'
-" パッケージ名の自動チェック,ローカルモジュールのオムニ補完↲
-NeoBundle 'duck8823/perl-support.vim'
 " vital
 NeoBundle 'vim-jp/vital.vim'
+" パッケージ名の自動チェック,ローカルモジュールのオムニ補完↲
+NeoBundle 'duck8823/perl-support.vim'
 " Plugin template
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 call neobundle#end()
@@ -186,6 +222,11 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
+"==========================================↲
+" Perl Support
+"==========================================↲
+let g:perl_support#module_dirs = [$HOME.'/.perl5lib']
+
 "==========================================
 " Snippet
 "==========================================
@@ -220,7 +261,7 @@ inoremap <expr><left> neocomplete#cancel_popup() . "\<left>"
 map <C-c> :SynfutasticCheck<CR>
 
 " ide
-noremap <C-c> yy
+noremap <C-c> y
 noremap <C-v> p
 noremap <C-a> ggVG
 noremap <C-i> =
@@ -235,4 +276,5 @@ noremap <C-t> :tabnew<CR>:NERDTree<CR>
 noremap <C-s> :w<CR>
 noremap <C-o> :NERDTree<CR>
 noremap <C-n> :NERDTreeToggle<CR>
+
 ```
