@@ -262,6 +262,9 @@ inoremap <expr><left> neocomplete#cancel_popup() . "\<left>"
 
 map <C-c> :SynfutasticCheck<CR>
 
+" コメントアウトトグル
+vmap <C-_> :call perl_support#comment_toggle()<CR>
+
 " ide
 noremap <C-c> y
 noremap <C-v> p
