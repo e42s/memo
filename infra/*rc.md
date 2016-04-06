@@ -22,6 +22,8 @@ termcapinfo xterm* hs@:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
 mousetrack on
 
 # terminal 256色
+attrcolor b ".I"
+defbce on
 termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 altscreen on
 
