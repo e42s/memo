@@ -28,3 +28,10 @@ $(window).on("load", function(){
     ...
 })
 ```
+  
+### 画面リサイズ
+```js
+$(window).on("resize", function() {
+    ...
+})
+```
