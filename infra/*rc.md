@@ -85,9 +85,11 @@ bindkey "^L" layout next
   
 .vimrc  
 ```vim
+" color scheme
 set background=dark
 colorscheme hybrid
 
+" 基本
 set number
 set tabstop=4
 set shiftwidth=4
@@ -130,11 +132,8 @@ set backspace=indent,eol,start
 filetype off
 
 " Vundle を初期化
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle./
 call vundle#rc()
-
-" Vundle
-Bundle 'gmarik/vundle'
 
 " Perl
 Bundle 'petdance/vim-perl'
@@ -177,6 +176,7 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'vim-jp/vital.vim'
 " パッケージ名の自動チェック,ローカルモジュールのオムニ補完↲
 NeoBundle 'duck8823/perl-support.vim'
+
 " Plugin template
 NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
 call neobundle#end()
