@@ -85,6 +85,9 @@ bindkey "^L" layout next
   
 .vimrc  
 ```vim
+set background=dark
+colorscheme hybrid
+
 set number
 set tabstop=4
 set shiftwidth=4
@@ -283,3 +286,5 @@ noremap <C-o> :NERDTree<CR>
 noremap <C-n> :NERDTreeToggle<CR>
 
 ```
+  
+[colorscheme](https://github.com/w0ng/vim-hybrid)
