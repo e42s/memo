@@ -1,3 +1,15 @@
+# コンストラクタ
+```perl
+sub new {
+  my $pkg = shift;
+  my $self = {
+    @_
+  };
+  return bless $self, $pkg;
+}
+```
+
+# サブルーチン
 ## メソッド呼び出し
 以下のサブルーチン
 ```perl
